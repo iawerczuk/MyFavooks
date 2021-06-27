@@ -1,0 +1,14 @@
+@import "variables";
+@import "elements";
+
+.nav-logo{
+  background: url("../images/favooks.png") no-repeat $color-green;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  .nav{
+    display: flex;
+    justify-content: space-around;
+    padding-right:50px;
+  }
+}
