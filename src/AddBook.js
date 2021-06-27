@@ -20,7 +20,6 @@ export default function AddBook() {
                 <input type="text" value={note} onChange={e => setNote(e.target.value)}/>
             </form>
                 <Cancel/>
-                <AddBook/>
                 <AddToBorrowed/>
                 <AddToWishlist/>
             </>
