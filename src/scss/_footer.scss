@@ -3,19 +3,27 @@
 
 .footer{
   height: 50px;
-  background-color: var(--color-green);
+  background-color: $color-green;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   .copyright {
   display: flex;
   align-items: center;
-  padding-left: 15px;
-.footer .copyright img {
+  padding: 15px;
+img {
   height: 30px;
   width: auto;
-}}
-footer .footer-logo img{
+}
+  h2{
+    color:$color-navy;
+    font-size: 12px;
+    padding-right: 20px;
+
+  }}
+.footer-logo img{
   height: 50px;
   width: auto;
   display: flex;
+  align-items: center;
 }}

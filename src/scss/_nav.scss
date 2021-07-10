@@ -1,14 +1,35 @@
 @import "variables";
 @import "elements";
 
-.nav-logo{
-  background: url("../images/favooks.png") no-repeat $color-green;
+.nav-logo {
+  background-color: $color-green;
   height: 100px;
   display: flex;
   justify-content: space-between;
-  .nav{
+  align-items: center;
+
+  .logo {
+    height: 80px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+;
+
+  .nav {
     display: flex;
     justify-content: space-around;
-    padding-right:50px;
+    padding-right: 50px;
+
+    .plus a{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    input{
+      background: url(../images/book-and-magnifier.svg) no-repeat scroll 7px 7px;
+      padding-right:30px;
+    }
   }
 }
