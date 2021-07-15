@@ -1,12 +1,15 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
-import heart from "../images/heart.png";
+import heartImg from "../images/heart.png";
 
 export default function AddToWishlist() {
 
     return(
         <>
-            <button><img src={heart} alt="dodaj do wishlisty"/></button>
+            <Link to="../wishlist">
+                <button className=" button heart" type="submit"><img src={heartImg} alt="wishlist"/></button>
+            </Link>
         </>
     )
 }

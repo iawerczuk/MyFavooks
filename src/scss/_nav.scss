@@ -20,16 +20,15 @@
   .nav {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding-right: 50px;
-
-    .plus a{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    input{
-      background: url(../images/book-and-magnifier.svg) no-repeat scroll 7px 7px;
-      padding-right:30px;
+    form{
+    display: flex;
+    align-items: center;
+      .button .magnifier{
+        padding-left: 20px;
+        margin-top: 25px;
+      }
     }
   }
 }

@@ -1,9 +1,24 @@
 {
   "books": [
     {
+      "id": 1,
       "title": "Czas na języki" ,
       "name": "Scholz S." ,
-      "note": "wyd. PSC"
+      "note": "wyd. PSC",
+      "paper": true,
+      "ebook": false,
+      "borrowed": false,
+      "wishlist": false,
+    },
+    {
+      "id": 2,
+      "title": "Inaczej" ,
+      "name": "Kotarski R." ,
+      "note": "IG",
+      "paper": true,
+      "ebook": false,
+      "borrowed": false,
+      "wishlist": false,
     }
   ]
 }

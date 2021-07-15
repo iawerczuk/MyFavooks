@@ -6,7 +6,7 @@ export default function Trash() {
     const [title, setTitle]=useState(null);
 
     useEffect(() => {
-        fetch(`${host}/bookslist`)
+        fetch(`${host}/BooksList`)
             .then(result => result.json())
             .then(books => setTitle(title))
     },[])
@@ -21,7 +21,7 @@ export default function Trash() {
     return (
         <div className="trash">
             <ul>
-                {title.map((el) => {
+                {title?.map((el) => {
                     return <button type="submit" onClick={() => handleTrash(el.title)}><img src={ trash } alt="usuń"/></button>
                     })}
             </ul>

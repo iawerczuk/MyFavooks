@@ -1,49 +1,27 @@
-import React from "react";
-import Trash from "../actions/Trash";
-import SortAZ from "../actions/SortAZ";
-import SortZA from "../actions/SortZA";
-import ebook from "../images/kindle.png"
+import React, { useState } from "react";
 
+import borrowedImg from "../images/borrow.png";
+import {Link} from "react-router-dom";
 export default function EbooksList() {
+    const [book, setBook]=useState();
 
     return(
         <>
-            <div className="ebooks column">
-                <div className="ebooks-img"/>
-                <img src={ebook} alt="książki"/>
-                <h1>lista ebooków</h1>
-                <p>sprawdź, co już masz na kindlu</p>
+            <div className="main">
+            <Link to="/BorrowedList">
+                <div className="borrowed container">
+                    <img src={borrowedImg} alt="wypożyczone"/>
+                    <h2>wypożyczone</h2>
+                    <p>zapisz, żeby nie zapomnieć</p>
+                </div>
+            </Link>
             </div>
-
-
-
-            <div className="titles">
-                <SortAZ books={[]}/>
-                <SortZA books={[]}/>
+            <div>
                 <ul>
-                    <li> </li>
-                </ul>
-            </div>
-            <div className="authors">
-                <SortAZ books={[]}/>
-                <SortZA books={[]}/>
-                <ul>
-                    <li> </li>
-                </ul>
-             </div>
-            <div className="notes">
-            <div className="star">
-                <img src="../images/star.svg" alt="rekomendacje"/>
-            </div>
-            <ul>
-
-            </ul>
-        </div>
-            <div className="actions">
-                <ul>
-                    <li>
-                        <Trash/>
-                    </li>
+                    {book?.filter(el => el.book).map(item => (
+                        <li>{item}</li>
+                    ))}
+                    <button >usuń</button>
                 </ul>
             </div>
         </>

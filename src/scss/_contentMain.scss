@@ -19,6 +19,40 @@
         box-shadow: 15px 10px 30px 10px $color-mint;
         padding: 50px;
         height: 500px;
+        .tooltip{
+          position: relative;
+          display: inline-block;
+          border-bottom: 1px dotted $color-navy;
+          :hover{
+            visibility: visible;
+            opacity: 1;
+          }
+          .tooltipTxt{
+            visibility: hidden;
+            background-color: $color-light-yellow;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 125%;
+            z-index: 1;
+            left: 50%;
+            margin-left: -6%;
+            opacity: 0;
+            transition: opacity 0.3s;
+            :after{
+              content: "";
+              position: absolute;
+              top: 100%;
+              left: 50%;
+              margin-left: -5px;
+              border-width: 5px;
+              border-style: solid;
+              border-color: $color-light-yellow transparent transparent transparent;
+            }
+
+          }
+        };
     }
   }
 }

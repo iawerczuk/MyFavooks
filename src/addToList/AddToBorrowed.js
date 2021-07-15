@@ -1,11 +1,15 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
+import borrowedImg from "../images/borrow.png";
 
 export default function AddToBorrowed() {
 
     return(
         <>
-            <button><img src="../images/borrow.png" alt="dodaj do listy pożyczonych książek"/></button>
+            <Link to="../borrowed">
+                <button className=" button borrow" type="submit"><img src={borrowedImg} alt="wypożyczone"/></button>
+            </Link>
         </>
     )
 }

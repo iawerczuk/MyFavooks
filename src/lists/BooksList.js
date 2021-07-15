@@ -1,49 +1,32 @@
-import React from "react";
+import React, {useState } from "react";
+import data from "../data/db.json";
+
 
 import Trash from "../actions/Trash";
-import SortAZ from "../actions/SortAZ";
-import SortZA from "../actions/SortZA";
-import bookImg from "../images/books.svg"
-import starImg from "../images/star.svg"
-export default function BooksList() {
 
+import {Link} from "react-router-dom";
+import bookImg from "../images/books.svg";
+
+
+export default function BooksList() {
+const [book, setBook]=useState();
     return(
         <>
-            <div className="books column">
-                <div className="books-img">
-                    <img src={ bookImg } alt="książki"/>
-                </div>
-                <h1>lista książek</h1>
-                <p>sprawdź, co już masz na papierze</p>
+            <div className="main">
+                <Link to="./BooksList">
+                    <div className="books container">
+                        <img src={bookImg} alt="książki"/>
+                        <h2>książki</h2>
+                        <p>sprawdź, co już masz na papierze</p>
+                    </div>
+                </Link>
             </div>
-            <div className="titles">
-                <SortAZ/>
-                <SortZA/>
-                <ul className="title-list">
-                    <li> </li>
-                </ul>
-            </div>
-            <div className="authors">
-                <SortAZ/>
-                <SortZA/>
-                <ul className="title-list">
-                    <li> </li>
-                </ul>
-            </div>
-            <div className="notes">
-                <div className="star">
-                    <img src={ starImg } alt="rekomendacje"/>
-                </div>
+            <div>
                 <ul>
-                    <li> </li>
-                </ul>
-            </div>
-            <div className="titles">
-                <ul>
-                    <li>
-                        <div className="borrow"/>
-                        <Trash/>
-                    </li>
+                    {book?.filter(el => el.book).map(item => (
+                        <li>{item}</li>
+                        ))}
+                <button >usuń</button>
                 </ul>
             </div>
         </>

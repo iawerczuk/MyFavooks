@@ -1,53 +1,98 @@
 import React, { useState, useEffect} from "react";
 import {Link} from "react-router-dom";
+
 import BooksList from "../lists/BooksList";
 import EbooksList from "../lists/EbooksList";
 import WishlistList from "../lists/WishlistList";
 import BorrowedList from "../lists/BorrowedList";
-
+import bookImg from "../images/books.svg";
+import kindleImg from "../images/kindle.png";
+import borrowedImg from "../images/books.svg";
+import heartImg from "../images/heart.png";
 
 export default function AddToBooks() {
 
-    const host="http://localhost:3000"
-    const [title, setTitle]=useState(null);
+    const host="http://localhost:3005"
+    const [books, setBooks] = useState(books)
 
     useEffect(() => {
-        fetch(`${host}/bookslist`)
+        fetch(`${host}/books`)
             .then(result => result.json())
-            .then(title => setTitle(title))
+            .then(r => setBooks(r))
             .catch((err) => console.warn(err))
     },[])
 
-    const handleAdd=(newTitle) => {
-        fetch(`${host}/bookslist`, {
+    const handleAdd=(id) => {
+        id.preventDefault();
+        const book = {
+            id:1,
+            title: "Czas na języki" ,
+            name: "Scholz S." ,
+            note: "wyd. PSC",
+            paper: true,
+            ebook: false,
+            borrowed: false,
+            wishlist: false,
+        }
+        fetch(`${host}/books`, {
             method:"POST",
-            body:JSON.stringify(newTitle),
+            body:JSON.stringify(book),
             headers:{
                 "Content-Type":'application/json'
             }
         })
             .then((response) => response.json())
-            .then((data => setTitle(prev=> [...prev, data])))
+            .then(book => setBooks(prev => ([
+                ...prev,
+                book
+            ])))
+            // .then(data => setTitle(prev=> [...prev, data]))
+            // .catch((err) => console.warn(err))
+
+        // if (title.length < 2) {
+        //     err.push("Tytuł jest za krótki");
+        // }
+        // if (author.length < 3) {
+        //     err.push("Nazwisko jest za krótkie");
+        // }
+        // if (note.length > 100) {
+        //     err.push("Notatka jest za długa")
     }
 
-
-    return(
+    return (
         <>
-            <AddToBooks addTitle={handleAdd} />
-            <ul>
-                {title.map((el)=>{
-                    return<li key={el.title}>
-                    <p>{el.title}</p>
-                    <p>{el.author}</p>
-                    <p>{el.note}</p>
-                    <button className="button"><img src="../images/books.svg" alt="dodaj do listy książek"/><BooksList/></button>
-                    <button className="button"><img src="../images/kindle.png" alt="dodaj do listy ebooków"/><EbooksList/></button>
-                    <button className="button"><img src="../images/borrow.png" alt="dodaj do listy książek wypożyczonych"/><BorrowedList/></button>
-                    <button className="button"><img src="../images/heart.png" alt="dodaj do wishlist"/><WishlistList/></button>
-                    </li>
+            //formularz, powieniem mieć handle add
+
+            <form className="form" onSubmit={handleAdd}>
+                {books.map((books)=>{
+                    return <div>
+                        <label >tytuł</label>
+                    <input key={id} type="text"
+                           name="title"
+                           value={book.title}/>
+                    <label htmlFor="author">autor</label>
+                    <input type="text"
+                           name="author"
+                           value={books.author}/>
+                    <label htmlFor="note">rekomendacje</label>
+                    <input type='text'
+                           name='note'
+                           className="note"
+                           value={books.note}/>
+                    </div>
                 })}
-            </ul>
+            </form>
+                {/*{books?.map((el)=>{*/}
+                {/*    return<li key={el.title}>*/}
+                {/*        <p>{el.title}</p>*/}
+                {/*        <p>{el.author}</p>*/}
+                {/*        <p>{el.note}</p>*/}
+                {/*        <p>{el.paper} {el.ebook} {el.borrowed} {el.wishlist}</p>*/}
+                       <Link to="./BooksList"><button className="button" onClick={() => handleAdd(books.id)}><img src={bookImg} alt="dodaj do listy książek"/></button></Link>
+                        <button className="button"><img src={kindleImg} alt="dodaj do listy ebooków"/></button>
+                        <button className="button"><img src={borrowedImg} alt="dodaj do listy książek wypożyczonych"/></button>
+                        <button className="button"><img src={heartImg} alt="dodaj do wishlist"/></button>
+                })}
         </>
     )
 }
-
