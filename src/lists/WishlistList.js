@@ -1,7 +1,5 @@
 import React from "react";
 import trash from "../actions/Trash";
-import SortAZ from "../actions/SortAZ";
-import SortZA from "../actions/SortZA";
 import book from "../images/books.svg";
 import ebook from "../images/kindle.png"
 import heart from "../images/heart.png"

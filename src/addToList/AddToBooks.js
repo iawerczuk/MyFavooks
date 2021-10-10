@@ -1,98 +1,97 @@
 import React, { useState, useEffect} from "react";
-import {Link} from "react-router-dom";
 
-import BooksList from "../lists/BooksList";
-import EbooksList from "../lists/EbooksList";
-import WishlistList from "../lists/WishlistList";
-import BorrowedList from "../lists/BorrowedList";
-import bookImg from "../images/books.svg";
-import kindleImg from "../images/kindle.png";
-import borrowedImg from "../images/books.svg";
-import heartImg from "../images/heart.png";
+import bookImg from "../images/book.png";
 
 export default function AddToBooks() {
 
-    const host="http://localhost:3005"
-    const [books, setBooks] = useState(books)
+    const host = "http://localhost:3005"
+    const [books, setBooks] = useState(null)
+    const [values, setValues] = useState({
+        title: "",
+        author: "",
+        note: ""
+    })
+
+    const handleChange = (e) => {
+        const { value, name } = e.target;
+        setValues(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
 
     useEffect(() => {
         fetch(`${host}/books`)
             .then(result => result.json())
-            .then(r => setBooks(r))
+            .then(t => setBooks(t))
+
             .catch((err) => console.warn(err))
-    },[])
+    }, [])
 
-    const handleAdd=(id) => {
-        id.preventDefault();
-        const book = {
-            id:1,
-            title: "Czas na języki" ,
-            name: "Scholz S." ,
-            note: "wyd. PSC",
-            paper: true,
-            ebook: false,
-            borrowed: false,
-            wishlist: false,
+    const handleAdd = (e) => {
+        e.preventDefault();
+
+        if (values.title.length < 2) {
+            alert("Tytuł jest za krótki");
         }
-        fetch(`${host}/books`, {
-            method:"POST",
-            body:JSON.stringify(book),
-            headers:{
-                "Content-Type":'application/json'
+        if (values.author.length < 3) {
+            alert("Nazwisko jest za krótkie");
+        }
+        if (values.note.length > 100) {
+            alert("Notatka jest za długa");
+        }
+
+
+            const book = {
+                id: 1,
+                title: "Czas na języki",
+                name: "Scholz S.",
+                note: "wyd. PSC",
             }
-        })
-            .then((response) => response.json())
-            .then(book => setBooks(prev => ([
-                ...prev,
-                book
-            ])))
-            // .then(data => setTitle(prev=> [...prev, data]))
-            // .catch((err) => console.warn(err))
+            fetch(`${host}/books`, {
+                method: "POST",
+                body: JSON.stringify(values),
+                headers: {
+                    "Content-Type": 'application/json'
+                }
+            })
+                .then((response) => response.json())
+                .then(book => setBooks(prev => ([
+                    ...prev, book
+                ])))
+                .catch((err) => console.warn(err))
+        }
 
-        // if (title.length < 2) {
-        //     err.push("Tytuł jest za krótki");
-        // }
-        // if (author.length < 3) {
-        //     err.push("Nazwisko jest za krótkie");
-        // }
-        // if (note.length > 100) {
-        //     err.push("Notatka jest za długa")
-    }
-
-    return (
-        <>
-            //formularz, powieniem mieć handle add
-
+        return (
+            <>
             <form className="form" onSubmit={handleAdd}>
-                {books.map((books)=>{
-                    return <div>
-                        <label >tytuł</label>
-                    <input key={id} type="text"
+                <div className="form-book">
+                    <label>tytuł</label>
+                    <input type="text"
                            name="title"
-                           value={book.title}/>
+                           value={values.title}
+                           onChange={handleChange}/>
                     <label htmlFor="author">autor</label>
                     <input type="text"
                            name="author"
-                           value={books.author}/>
+                           value={values.author}
+                           onChange={handleChange}/>
                     <label htmlFor="note">rekomendacje</label>
                     <input type='text'
                            name='note'
                            className="note"
-                           value={books.note}/>
-                    </div>
-                })}
+                           value={values.note}
+                           onChange={handleChange}/>
+                    <input type="image" className="btn" src={bookImg} alt="dodaj do listy książek"/>
+                </div>
             </form>
-                {/*{books?.map((el)=>{*/}
-                {/*    return<li key={el.title}>*/}
-                {/*        <p>{el.title}</p>*/}
-                {/*        <p>{el.author}</p>*/}
-                {/*        <p>{el.note}</p>*/}
-                {/*        <p>{el.paper} {el.ebook} {el.borrowed} {el.wishlist}</p>*/}
-                       <Link to="./BooksList"><button className="button" onClick={() => handleAdd(books.id)}><img src={bookImg} alt="dodaj do listy książek"/></button></Link>
-                        <button className="button"><img src={kindleImg} alt="dodaj do listy ebooków"/></button>
-                        <button className="button"><img src={borrowedImg} alt="dodaj do listy książek wypożyczonych"/></button>
-                        <button className="button"><img src={heartImg} alt="dodaj do wishlist"/></button>
-                })}
-        </>
-    )
-}
+                <ul className="list">
+                    {books?.map((book, id) => {
+                        return(
+                        <li key={id}>{book.title} {book.author} {book.note}</li>
+                        );
+                    })}
+                </ul>
+            </>
+        )
+    }

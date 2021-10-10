@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 
-import SortAZ from "../actions/SortAZ";
-import SortZA from "../actions/SortZA";
-import borrow from "../images/borrow.png"
-import Trash from "../actions/Trash";
 import {Link} from "react-router-dom";
 import ebookImg from "../images/kindle.png";
 

@@ -1,34 +1,56 @@
-import React, {useState } from "react";
-import data from "../data/db.json";
+import React, {useState, useEffect } from "react";
+import AddToBooks from "../addToList/AddToBooks";
 
 
-import Trash from "../actions/Trash";
+export default function BooksList({ books, onTrash}) {
+    const host = "http://localhost:3005"
+    const [title, setTitle] = useState('')
+    const [author, setAuthor] = useState('')
+    const [note, setNote] = useState('')
 
-import {Link} from "react-router-dom";
-import bookImg from "../images/books.svg";
+    useEffect(() => {
+        fetch(`${host}/books`)
+            .then(result => result.json())
+            .then(t => setTitle(t))
+            .then(a => setAuthor(a))
+            .then(n => setNote(n))
+            .catch((err) => console.warn(err))
+    }, [])
 
+            const book = {
+                id: 1,
+                title: "Czas na języki",
+                name: "Scholz S.",
+                note: "wyd. PSC",
+                paper: true,
+                ebook: false,
+                borrowed: false,
+                wishlist: false,
+            }
+            fetch(`${host}/books`, {
+                method: "PUT",
+                body: JSON.stringify(book),
+                headers: {
+                    "Content-Type": 'application/json'
+                }
+            })
+                .then((response) => response.json())
+                .then(title => setTitle(prev => ([
+                    ...prev,
+                    title])))
+                .then(author => setAuthor(prev => ([
+                    ...prev,
+                    author])))
+                .then(note => setNote(prev => ([
+                    ...prev,
+                    note])))
+                .catch((err) => console.warn(err))
 
-export default function BooksList() {
-const [book, setBook]=useState();
-    return(
-        <>
+    return (
             <div className="main">
-                <Link to="./BooksList">
-                    <div className="books container">
-                        <img src={bookImg} alt="książki"/>
-                        <h2>książki</h2>
-                        <p>sprawdź, co już masz na papierze</p>
-                    </div>
-                </Link>
-            </div>
-            <div>
-                <ul>
-                    {book?.filter(el => el.book).map(item => (
-                        <li>{item}</li>
+                {books.map((book, i) => (
+                    <AddToBooks key={i} book={book} onTrash={onTrash} />
                         ))}
-                <button >usuń</button>
-                </ul>
             </div>
-        </>
     )
-};
+}

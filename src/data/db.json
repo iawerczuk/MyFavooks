@@ -2,15 +2,16 @@
   "books": [
     {
       "id": 1,
-      "title": "Czas na języki" ,
-      "name": "Scholz S." ,
-      "note": "wyd. PSC",
+      "title": "Czas na języki",
+      "name": "Scholz S.",
+      "note": "wyd. PSC"
     },
     {
       "id": 2,
-      "title": "Inaczej" ,
-      "name": "Kotarski R." ,
-      "note": "IG",
-    }
+      "title": "Inaczej",
+      "name": "Kotarski R.",
+      "note": "IG"
+    },
   ]
 }
+//json-server --watch -p 3005 db.json

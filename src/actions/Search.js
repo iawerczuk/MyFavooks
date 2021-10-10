@@ -16,7 +16,7 @@ export default function Search() {
 
     return (
         <div>
-            <input type="text" placeholder="Search" value={searchPhrase} onChange={handleChange}/>
+            <input type="text" placeholder="Search" value={setSearchResults} onChange={handleChange}/>
             <ul>
                 {searchResults.map(item => (
                     <li>{item}</li>

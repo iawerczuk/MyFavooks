@@ -1,9 +1,6 @@
 import React from "react";
 import logoApp from "../images/favooks.png"
-import plusImg from "../images/plus.png";
-import magnifierImg from "../images/magnifier.svg";
-import {HashRouter, Link} from "react-router-dom";
-import Search from "../actions/Search";
+import { Link} from "react-router-dom";
 export default function Nav() {
 
     return(
@@ -12,12 +9,8 @@ export default function Nav() {
                 <Link to="../" ><img className="logo" src={logoApp} alt="logo"/></Link>
                 <div className="nav">
                     <form>
-                        <Link to="./AddToBooks">
-                            <button className=" button plus" type="submit"><img src={plusImg} alt="szukaj"/></button>
-                        </Link>
-                        <input type="text" id='text' placeholder="search" autoComplete="off"/>
                         <Link to="../search">
-                            <button className=" button magnifier" type="submit"><img src={magnifierImg} alt="szukaj"/></button>
+                            <input type="text" className="search" placeholder="szukaj..."/>
                         </Link>
                     </form>
                 </div>
