@@ -7,6 +7,9 @@ import Footer from "./parts/Footer";
 import BooksList from "./lists/BooksList";
 import EbooksList from "./lists/EbooksList";
 import AddToBooks from "./addToList/AddToBooks";
+import AddToEbooks from "./addToList/AddToEbooks";
+import AddToBorrowed from "./addToList/AddToEbooks";
+import AddToWishlist from './addToList/AddToWishlist';
 import Search from "./actions/Search";
 import NotFound from "./parts/NotFound";
 
@@ -18,6 +21,9 @@ function App() {
             <Switch>
                 <Route exact path={"/"} component={Main} />
                 <Route exact path={"/AddToBooks"} component={AddToBooks} />
+                <Route exact path={"/AddToEbooks"} component={AddToEbooks} />
+                <Route exact path={"/AddToBorrowed"} component={AddToBorrowed} />
+                <Route exact path={"/AddToWishlist"} component={AddToWishlist} />
                 <Route exact path={"/Search"} component={Search}/>
                 <Route exact path={"/BooksList"} component={BooksList} />
                 <Route exact path={"/EbooksList"} component={EbooksList} />

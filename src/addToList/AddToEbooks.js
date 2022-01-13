@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 
-import ebookImg from "../images/book.png";
+import ebookImg from "../images/kindle.png";
 
 export default function AddToEbooks() {
 
@@ -23,7 +23,7 @@ export default function AddToEbooks() {
     useEffect(() => {
         fetch(`${host}/ebooks`)
             .then(result => result.json())
-            .then(t => setBooks(t))
+            .then(t => setEbooks(t))
 
             .catch((err) => console.warn(err))
     }, [])
